@@ -1,25 +1,63 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { createHashRouter, RouterProvider, Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+import FormAddProduct from './components/FormAddProduct/FormAddProduct';
+import FormEditProduct from './components/FormEditProduct/FormEditProduct';
+import Navbar from './components/Navbar/Navbar';
+import ProductsList from './components/ProductsList/ProductsList';
+import { useAppDispatch } from './app/hooks';
+import { fetchProducts } from './features/shop/shop-slice';
+import { dummyProducts } from './data/dummy-products';
+import { GlobalStyle } from './assets/styles/global';
+
+const Layout = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+    </>
+  );
+};
+
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <ProductsList />,
+      },
+      {
+        path: '/add',
+        element: <FormAddProduct />,
+      },
+      {
+        path: '/edit/:id',
+        element: <FormEditProduct />,
+      },
+    ],
+  },
+]);
+
+const Wrapper = styled.div`
+  max-width: 1500px;
+  padding: 0 3rem;
+  width: 100%;
+`;
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts(dummyProducts));
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </Wrapper>
   );
 }
 
