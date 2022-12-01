@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/react-shop-task/static/js/main.d8596ded.js",
+    "static/media/logo.png": "/react-shop-task/static/media/logo.b22c1399971e9c084e38.png",
+    "index.html": "/react-shop-task/index.html",
+    "main.d8596ded.js.map": "/react-shop-task/static/js/main.d8596ded.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.d8596ded.js"
+  ]
+}
