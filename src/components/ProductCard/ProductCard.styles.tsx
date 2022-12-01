@@ -32,6 +32,7 @@ export const ImgProductContainer = styled.div`
   display: flex;
   justify-content: center;
   height: 50%;
+  padding-top: 1rem;
 `;
 
 export const ProductImg = styled.img`
